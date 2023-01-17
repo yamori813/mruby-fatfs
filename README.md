@@ -13,13 +13,8 @@ end
 ```
 ## example
 ```ruby
-p FatFs.hi
-#=> "hi!!"
-t = FatFs.new "hello"
-p t.hello
-#=> "hello"
-p t.bye
-#=> "hello bye"
+f = FatFs.new "fat.img"
+f.dir "0:"
 ```
 
 ## License
