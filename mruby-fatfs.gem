@@ -1,0 +1,7 @@
+name: mruby-fatfs
+description: FatFs class
+author: Hiroki Mori
+website: https://github.com/yamori813/mruby-fatfs
+protocol: git
+repository: https://github.com/yamori813/mruby-fatfs.git
+license: MIT
