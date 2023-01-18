@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 #include "ff.h"		/* Obtains integer types */
 #include "diskio.h"	/* Declarations of disk functions */
@@ -79,9 +80,12 @@ DRESULT disk_write (
 	UINT count	/* Number of sectors to write */
 )
 {
-printf("MORIMORI WR");
 
-	return RES_PARERR;
+	lseek(fatfd, 512 * sector, SEEK_SET);
+	write(fatfd, buff, 512 * count);
+
+	return RES_OK;
+//	return RES_PARERR;
 }
 
 #endif
@@ -97,9 +101,10 @@ DRESULT disk_ioctl (
 	void *buff	/* Buffer to send/receive control data */
 )
 {
-printf("MORIMORI CT");
+//printf("MORIMORI CT");
 
-	return RES_PARERR;
+	return RES_OK;
+//	return RES_PARERR;
 }
 
 /*-----------------------------------------------------------------------*/
@@ -108,6 +113,14 @@ printf("MORIMORI CT");
 
 DWORD get_fattime (void)
 {
+	DWORD res;
+	struct tm tm;
+	time_t t = time(NULL);
+	localtime_r(&t, &tm);
 
-	return 0;
+	res =  ((tm.tm_year - 80) << 25) | ((tm.tm_mon + 1) << 21) |
+	    (tm.tm_mday << 16) | (tm.tm_hour << 11) | (tm.tm_min << 5) |
+	    (tm.tm_sec / 2);
+
+	return res;
 }
