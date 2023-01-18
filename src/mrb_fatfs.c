@@ -88,7 +88,7 @@ static mrb_value mrb_fatfs_create(mrb_state *mrb, mrb_value self)
   mrb_fatfs_data *data = DATA_PTR(self);
   mrb_value arry;
   char *path;
-  char buffer[512];
+  unsigned char buffer[512];
   mrb_int len;
   int alen;
   FIL fi;
@@ -123,7 +123,7 @@ static mrb_value mrb_fatfs_read(mrb_state *mrb, mrb_value self)
   mrb_fatfs_data *data = DATA_PTR(self);
   mrb_value res;
   char *path;
-  char buffer[512];
+  unsigned char buffer[512];
   mrb_int len;
   FIL fi;
   UINT br;
